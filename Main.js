@@ -38,6 +38,22 @@ function updateAll() {
     console.log("Done");
 }
 
+// --
+// 個別実行用
+// --
+function updateOne() {
+    const type = 0; // <= param
+    // シート
+    const ss = SpreadsheetApp.openById(ssIdList[idx]);
+    const sheet = ss.getSheetByName("Main");
+    // 日付
+    let date = new Date();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    // --
+    updateEach(type, sheet, month, day);
+}
+
 function updateEach(type, sheet, month, day) {
     // 日付の記入
     sheet.getRange(1, 2).setValue(month);

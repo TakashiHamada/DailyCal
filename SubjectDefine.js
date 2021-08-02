@@ -50,8 +50,8 @@ function addition20_1() {
 // 100までの足し算, 10単位の簡単な足し算
 function additional100_0() {
     let subject = {};
-    subject.a = Math.floor(Math.random() * 10) * 10; // 10 - 90
-    subject.b = Math.floor(Math.random() * 10) * 10; // 10 - 90
+    subject.a = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
+    subject.b = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
     subject.addMode = true; // たしざん
     // 100まで
     if (subject.a + subject.b <= 100)
@@ -108,8 +108,8 @@ function subtraction100_0() {
 // 100までの引き算, 10単位の簡単な引き算
 function subtraction100_1() {
     let subject = {};
-    subject.a = Math.floor(Math.random() * 10) * 10; // 10 - 90
-    subject.b = Math.floor(Math.random() * 10) * 10; // 10 - 90
+    subject.a = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
+    subject.b = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
     subject.addMode = false; // ひきざん
     // 検査, マイナスになるか？
     if (subject.a < subject.b) {
