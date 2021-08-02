@@ -6,6 +6,9 @@ const ssIdList =
         "1KrL8Oqa27QOFD1ac5GGCux93Ylt1mp2Yv3IYxH5j6ys", // 20までの引き算（くりさがり）
     ];
 
+// --
+// PDF出力先の表示
+// --
 function showPdfUrl() {
     const head = "https://docs.google.com/spreadsheets/d/";
     const end = "/export?format=pdf";
@@ -13,6 +16,9 @@ function showPdfUrl() {
         console.log(head + ssIdList[idx] + end);
 }
 
+// --
+// 更新, トリガーで指定すること
+// --
 function updateAll() {
     for (let idx = 0; idx < ssIdList.length; idx++) {
         // シート
@@ -25,6 +31,8 @@ function updateAll() {
         // --
         updateEach(idx, sheet, month, day);
     }
+    
+    console.log("Done");
 }
 
 function updateEach(type, sheet, month, day) {
@@ -43,38 +51,9 @@ function updateEach(type, sheet, month, day) {
     }
 
     console.log(list);
-    // return;
+    
     write(sheet, list, "LeftCol");
     write(sheet, list, "RightCol");
-
-    // for (let idx = 0; idx < 15; idx++) {
-    //     var row = (2 * idx) + 3;
-    //
-    //     var range = sheet.getRange(row, 2, 1, 5);
-    //     var values = range.getValues();
-    //
-    //     values[0] = createSubject(list[idx]);
-    //
-    //     range.setValues(values);
-    //
-    //     console.log(idx);
-    // }
-    //
-    // for (let idx = 15; idx < 30; idx++) {
-    //     var row = (2 * (idx - 15)) + 3;
-    //
-    //     var range = sheet.getRange(row, 13, 1, 5);
-    //     var values = range.getValues();
-    //
-    //     values[0] = createSubject(list[idx]);
-    //
-    //     range.setValues(values);
-    //
-    //     console.log(idx);
-    // }
-    //
-    console.log("Done");
-
 }
 
 function createSubject(subject) {
