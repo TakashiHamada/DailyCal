@@ -115,8 +115,8 @@ function subtraction100_0() {
 // 100までの引き算, 10単位の簡単な引き算
 function subtraction100_1() {
     let subject = {};
-    subject.a = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
-    subject.b = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
+    subject.a = (Math.floor(Math.random() * 8) * 10) + 30; // 30 - 100
+    subject.b = (Math.floor(Math.random() * 8) * 10) + 10; // 10 - 80
     subject.addMode = false; // ひきざん
     // 検査, マイナスになるか？
     if (subject.a < subject.b) {
