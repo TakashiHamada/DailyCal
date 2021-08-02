@@ -42,7 +42,7 @@ function updateAll() {
 // 個別実行用
 // --
 function updateOne() {
-    const type = 0; // <= param
+    const idx = 0; // <= param
     // シート
     const ss = SpreadsheetApp.openById(ssIdList[idx]);
     const sheet = ss.getSheetByName("Main");
@@ -51,7 +51,7 @@ function updateOne() {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     // --
-    updateEach(type, sheet, month, day);
+    updateEach(idx, sheet, month, day);
 }
 
 function updateEach(type, sheet, month, day) {
