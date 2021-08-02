@@ -4,6 +4,9 @@ const ssIdList =
         "1yfK-8gVzbcSuaJHMD5w4g6ao-9FsyG8oD9BgvacHb1w", // 20までの足し算（くりあがり）
         "1sjskBbprhEyqvQzXXl7oTUNNAzk64WEGXRBVOofZC9U", // 10までの引き算
         "1KrL8Oqa27QOFD1ac5GGCux93Ylt1mp2Yv3IYxH5j6ys", // 20までの引き算（くりさがり）
+        "1GXpdCMm5G8sgu3rNMvMqTBAn-s96g9MvUzDB8FBaOnQ", // 10までの足し算
+        "19dqrMTa38sd1caYH2-gCPDDQ4JRdqtggWc_YUrt_j4c", // 20までの足し算（１０といくつ）
+        "1EfaNzVGKX8Vy43UHlZ4hbwPOYP7ERTvjn6_84lOY5zo", // 10単位の簡単な足し算
     ];
 
 // --

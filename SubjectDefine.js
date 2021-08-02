@@ -1,9 +1,12 @@
 
 function getSubjectByType(type) {
     switch (type) {
-        case 0 : return addition20();
+        case 0 : return addition20_1();
         case 1 : return subtraction10();
         case 2 : return subtraction20();
+        case 3 : return addition10();
+        case 4 : return addition20_0();
+        case 5 : return additional100_0();
     }
     // 例外
     return null;
