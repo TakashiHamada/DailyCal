@@ -1,12 +1,15 @@
 
 function getSubjectByType(type) {
     switch (type) {
-        case 0 : return addition20_1();
-        case 1 : return subtraction10();
-        case 2 : return subtraction20();
-        case 3 : return addition10();
-        case 4 : return addition20_0();
-        case 5 : return additional100_0();
+        case 0 : return addition10();
+        case 1 : return addition20_0();
+        case 2 : return addition20_1();
+        case 3 : return addition100_0();
+        case 4 : return addition100_1();
+        case 5 : return subtraction10();
+        case 6 : return subtraction20();
+        case 7 : return subtraction100_0();
+        case 8 : return subtraction100_1();
     }
     // 例外
     return null;
@@ -48,7 +51,7 @@ function addition20_1() {
 }
 
 // 100までの足し算, 10単位の簡単な足し算
-function additional100_0() {
+function addition100_0() {
     let subject = {};
     subject.a = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
     subject.b = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
@@ -61,12 +64,16 @@ function additional100_0() {
 }
 
 // 2桁＋1桁, 繰り上がりの有無どちらも含む
-function additional100_1() {
+function addition100_1() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 71) + 21; // 21 - 91
     subject.b = Math.floor(Math.random() * 8) + 2; // 2 - 9
     subject.addMode = true; // たしざん
-    return subject;
+    // 最大100
+    if (subject.a - subject.b <= 100)
+        return subject;
+    // --
+    return null;
 }
 
 function subtraction10() {
