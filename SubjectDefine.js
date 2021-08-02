@@ -1,4 +1,4 @@
-function selector(type) {
+function getSubjectByType(type) {
     switch (type) {
         case 0 : return addition20();
         case 1 : return subtraction10();

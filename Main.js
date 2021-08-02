@@ -23,58 +23,56 @@ function updateAll() {
         const month = date.getMonth() + 1;
         const day = date.getDate();
         // --
-        updateEach(sheet, month, day);
+        updateEach(idx, sheet, month, day);
     }
 }
 
-function updateEach(sheet, month, day) {
+function updateEach(type, sheet, month, day) {
     // 日付の記入
     sheet.getRange(1, 2).setValue(month);
     sheet.getRange(1, 4).setValue(day);
 
     let list = [];
     while (list.length <= 30) {
-        var subject = new Object();
-        subject.idx = list.length;
-        subject.a = Math.floor(Math.random() * 9) + 10; // 10 - 18
-        subject.b = Math.floor(Math.random() * 7) + 3; // 3 - 9
-        subject.addMode = false; // ひきざん
-
-        // 検査
-        let chk = subject.a - subject.b;
-        if (0 < chk && chk < 10)
+        let subject = getSubjectByType(type);
+        // 検査に不合格な場合もあるので
+        if (subject !== null) {
+            subject.idx = list.length; // idxを、むりやり挿入
             list.push(subject);
+        }
     }
 
     console.log(list);
     // return;
+    write(sheet, list, "LeftCol");
+    write(sheet, list, "RightCol");
 
-    for (let idx = 0; idx < 15; idx++) {
-        var row = (2 * idx) + 3;
-
-        var range = sheet.getRange(row, 2, 1, 5);
-        var values = range.getValues();
-
-        values[0] = createSubject(list[idx]);
-
-        range.setValues(values);
-
-        console.log(idx);
-    }
-
-    for (let idx = 15; idx < 30; idx++) {
-        var row = (2 * (idx - 15)) + 3;
-
-        var range = sheet.getRange(row, 13, 1, 5);
-        var values = range.getValues();
-
-        values[0] = createSubject(list[idx]);
-
-        range.setValues(values);
-
-        console.log(idx);
-    }
-
+    // for (let idx = 0; idx < 15; idx++) {
+    //     var row = (2 * idx) + 3;
+    //
+    //     var range = sheet.getRange(row, 2, 1, 5);
+    //     var values = range.getValues();
+    //
+    //     values[0] = createSubject(list[idx]);
+    //
+    //     range.setValues(values);
+    //
+    //     console.log(idx);
+    // }
+    //
+    // for (let idx = 15; idx < 30; idx++) {
+    //     var row = (2 * (idx - 15)) + 3;
+    //
+    //     var range = sheet.getRange(row, 13, 1, 5);
+    //     var values = range.getValues();
+    //
+    //     values[0] = createSubject(list[idx]);
+    //
+    //     range.setValues(values);
+    //
+    //     console.log(idx);
+    // }
+    //
     console.log("Done");
 
 }
@@ -87,4 +85,23 @@ function createSubject(subject) {
     list[3] = subject.b;
     list[4] = "'=";
     return list;
+}
+
+// 書き込み用
+function write(sheet, list, mode) {
+    // 注意, 1行ずつの書き込みは遅いので、増えた場合は一括にすること
+    // ただし、１行ずつ書き込まれたほうが動いている感じがして子供が喜ぶ
+    // --
+    let isLeftCol = mode === "LeftCol"; // 読み出し時の可読性を考慮
+    let start = isLeftCol ? 0 : 15;
+    let end = isLeftCol ? 15 : 30;
+    // --
+    for (let idx = start; idx < end; idx++) {
+        let row = isLeftCol ? (2 * idx) + 3 : (2 * (idx - 15)) + 3;
+        let range = sheet.getRange(row, isLeftCol ? 2 : 13, 1, 5);
+        // --
+        let values = range.getValues();
+        values[0] = createSubject(list[idx]);
+        range.setValues(values); // <= 書き込み
+    }
 }
