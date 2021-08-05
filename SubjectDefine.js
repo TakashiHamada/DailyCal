@@ -1,15 +1,17 @@
 
 function getSubjectByType(type) {
     switch (type) {
-        case 0 : return addition10();
-        case 1 : return addition20_0();
-        case 2 : return addition20_1();
-        case 3 : return addition100_0();
-        case 4 : return addition100_1();
-        case 5 : return subtraction10();
-        case 6 : return subtraction20();
-        case 7 : return subtraction100_0();
-        case 8 : return subtraction100_1();
+        case  0 : return addition10();
+        case  1 : return addition20_0();
+        case  2 : return addition20_1();
+        case  3 : return addition100_0();
+        case  4 : return addition100_1();
+        case  5 : return subtraction10();
+        case  6 : return subtraction20();
+        case  7 : return subtraction100_0();
+        case  8 : return subtraction100_1();
+        case  9 : return doublet_0();
+        case 10 : return doublet_1();
     }
     // 例外
     return null;
@@ -125,4 +127,34 @@ function subtraction100_1() {
         subject.b = subject.a;
     }
     return subject;
+}
+
+// オジリナル, ゾロ目, 2桁 +- 1桁
+function doublet_0() {
+    let origin = (Math.floor(Math.random() * 9) + 1) + ""; // 1 - 9
+    let answer = parseInt(origin + origin); // 11 - 99
+    let addMode = Math.random() < 0.5;
+    // --
+    let subject = {};
+    subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.a = answer + (subject.b * (addMode ? -1 : 1));
+    subject.addMode = addMode;
+    return subject;
+}
+
+// オジリナル, ゾロ目, 2桁 +- 2桁
+function doublet_1() {
+    let origin = (Math.floor(Math.random() * 9) + 1) + ""; // 1 - 9
+    let answer = parseInt(origin + origin); // 11 - 99
+    let addMode = Math.random() < 0.5;
+    // --
+    let subject = {};
+    subject.b = Math.floor(Math.random() * 80) + 10; // 11 - 89
+    subject.a = answer + (subject.b * (addMode ? -1 : 1));
+    subject.addMode = addMode;
+    // --
+    if (10 < subject.a && subject.a < 100)
+        return subject;
+    // --
+    return null;
 }
