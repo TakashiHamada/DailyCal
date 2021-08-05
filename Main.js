@@ -39,7 +39,7 @@ function updateAll() {
         // --
         updateEach(idx, sheet, month, day);
     }
-    
+
     console.log("Done");
 }
 
@@ -65,19 +65,36 @@ function updateEach(type, sheet, month, day) {
     sheet.getRange(1, 4).setValue(day);
 
     let list = [];
+    let lastSubject = null;
+
     while (list.length <= 30) {
         let subject = getSubjectByType(type);
-        // 検査に不合格な場合もあるので
+        // 検査に不合格でないか
         if (subject !== null) {
-            subject.idx = list.length; // idxを、むりやり挿入
-            list.push(subject);
+            // 直前の問題と特定要素が同じではないか
+            if (!isSameContent(subject, lastSubject)) {
+                subject.idx = list.length; // idxを、むりやり挿入
+                list.push(subject);
+                // 重複防止のための入れ物
+                lastSubject = subject;
+            }
         }
     }
 
     console.log(list);
-    
+
     write(sheet, list, "LeftCol");
     write(sheet, list, "RightCol");
+}
+
+// idxは対象外なので、要素を一つずつ比べる
+function isSameContent(newOne, oldOne) {
+    // nullチェック
+    if (oldOne === null) return false;
+    // --
+    return newOne.a === oldOne.a &&
+        newOne.b === oldOne.b &&
+        newOne.addMode === oldOne.addMode;
 }
 
 function createSubject(subject) {
