@@ -139,7 +139,10 @@ function doublet_0() {
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.a = answer + (subject.b * (addMode ? -1 : 1));
     subject.addMode = addMode;
-    return subject;
+    if (subject.a < 100)
+        return subject;
+    // --
+    return null;
 }
 
 // オジリナル, ゾロ目, 2桁 +- 2桁
