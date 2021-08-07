@@ -80,7 +80,7 @@ function addition100_1() {
 
 function subtraction10() {
     let subject = {};
-    subject.a = Math.floor(Math.random() * 10); // 0 - 9
+    subject.a = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.b = Math.floor(Math.random() * 10); // 0 - 9
     subject.addMode = false; // ひきざん
     // 検査, マイナスになるか？
@@ -88,6 +88,14 @@ function subtraction10() {
         // ひっくり返す
         subject.a = subject.b;
         subject.b = subject.a;
+    }
+    // 答えが少ない数字の場合は、不合格にするときもある
+    var answer = subject.a - subject.b;
+    if (answer === 0) {
+        if (Math.random() < 0.9) return null;
+    }
+    else if(answer <= 3) {
+        if (Math.random() < 0.5) return null;
     }
     return subject;
 }
