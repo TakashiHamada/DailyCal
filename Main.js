@@ -1,17 +1,20 @@
 // 順番、大事
 const ssIdList =
     [
-        "1GXpdCMm5G8sgu3rNMvMqTBAn-s96g9MvUzDB8FBaOnQ", // 10までの足し算
-        "19dqrMTa38sd1caYH2-gCPDDQ4JRdqtggWc_YUrt_j4c", // 20までの足し算（１０といくつ）
-        "1yfK-8gVzbcSuaJHMD5w4g6ao-9FsyG8oD9BgvacHb1w", // 20までの足し算（くりあがり）
-        "1EfaNzVGKX8Vy43UHlZ4hbwPOYP7ERTvjn6_84lOY5zo", // 10単位の簡単な足し算
-        "1h1_nc2--ayjRlILLUWAq_KnB4Q7Gii3LlV6r6bOB2bY", // 100までの足し算（何＋何）＋（何）
-        "1sjskBbprhEyqvQzXXl7oTUNNAzk64WEGXRBVOofZC9U", // 10までの引き算
-        "1KrL8Oqa27QOFD1ac5GGCux93Ylt1mp2Yv3IYxH5j6ys", // 20までの引き算（くりさがり）
-        "1f6lc5qAtW8g0XjNtlYSZGYH9lasusYJhyFdTb821sX0", // 100までの引き算（何＋何）ー（何）
-        "1RYkj22xGcLHgVcWH4xnGBBVzQbvEGkkxYaDXzdzk9Mc", // 100までの引き算（１０単位の簡単な引き算）
-        "1Vg9RG_E3NYGZu-Ymw5d-GGizrL0qcLEQyXUXFnk-01o", // 100までの足し引き算（ゾロ目, 2桁と1桁）
-        "1hqOwvX204dQaJfUzANnR_87nOdSDknp1IJsbu90ZgAE", // 100までの足し引き算（ゾロ目, 2桁と2桁）
+        // スプレッドシートが格納されているフォルダ
+        // https://drive.google.com/drive/folders/10usx9Vi9ZLJeLR8zybSbnuV835zqGqky
+        
+        "1GXpdCMm5G8sgu3rNMvMqTBAn-s96g9MvUzDB8FBaOnQ", // 0,  10までの足し算
+        "19dqrMTa38sd1caYH2-gCPDDQ4JRdqtggWc_YUrt_j4c", // 1,  20までの足し算（１０といくつ）
+        "1yfK-8gVzbcSuaJHMD5w4g6ao-9FsyG8oD9BgvacHb1w", // 2,  20までの足し算（くりあがり）
+        "1EfaNzVGKX8Vy43UHlZ4hbwPOYP7ERTvjn6_84lOY5zo", // 3,  10単位の簡単な足し算
+        "1h1_nc2--ayjRlILLUWAq_KnB4Q7Gii3LlV6r6bOB2bY", // 4,  100までの足し算（何＋何）＋（何）
+        "1sjskBbprhEyqvQzXXl7oTUNNAzk64WEGXRBVOofZC9U", // 5,  10までの引き算
+        "1KrL8Oqa27QOFD1ac5GGCux93Ylt1mp2Yv3IYxH5j6ys", // 6,  20までの引き算（くりさがり）
+        "1f6lc5qAtW8g0XjNtlYSZGYH9lasusYJhyFdTb821sX0", // 7,  100までの引き算（何＋何）ー（何）
+        "1RYkj22xGcLHgVcWH4xnGBBVzQbvEGkkxYaDXzdzk9Mc", // 8,  100までの引き算（１０単位の簡単な引き算）
+        "1Vg9RG_E3NYGZu-Ymw5d-GGizrL0qcLEQyXUXFnk-01o", // 9,  100までの足し引き算（ゾロ目, 2桁と1桁）
+        "1hqOwvX204dQaJfUzANnR_87nOdSDknp1IJsbu90ZgAE", // 10, 100までの足し引き算（ゾロ目, 2桁と2桁）
     ];
 
 // --
