@@ -12,6 +12,8 @@ function getSubjectByType(type) {
         case  8 : return subtraction100_1();
         case  9 : return doublet_0();
         case 10 : return doublet_1();
+        case 11 : return subtraction_from10();
+        case 12 : return diff_from10();
     }
     // 例外
     return null;
@@ -168,4 +170,22 @@ function doublet_1() {
         return subject;
     // --
     return null;
+}
+
+// オリジナル, 10からの引き算
+function subtraction_from10() {
+    let subject = {};
+    subject.a = 10;
+    subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.addMode = false;
+    return subject;
+}
+
+// オリジナル, 10からの変化
+function diff_from10() {
+    let subject = {};
+    subject.a = 10;
+    subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.addMode = Math.random() < 0.5; // たしひき算 
+    return subject;
 }

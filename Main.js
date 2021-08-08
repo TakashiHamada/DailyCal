@@ -15,6 +15,8 @@ const ssIdList =
         "1RYkj22xGcLHgVcWH4xnGBBVzQbvEGkkxYaDXzdzk9Mc", // 8,  100までの引き算（１０単位の簡単な引き算）
         "1Vg9RG_E3NYGZu-Ymw5d-GGizrL0qcLEQyXUXFnk-01o", // 9,  100までの足し引き算（ゾロ目, 2桁と1桁）
         "1hqOwvX204dQaJfUzANnR_87nOdSDknp1IJsbu90ZgAE", // 10, 100までの足し引き算（ゾロ目, 2桁と2桁）
+        "1I7PW2L8VLx4ysa9B9ruKCgfM4YKHhmLcPb6luWEYMnM", // 11, 10からの引き算
+        "1AaJaYKQvefv3ti1h3-oXQUB5Bw2JE9yonXfwjcOcbqo", // 12, 10からの差
     ];
 
 // --
