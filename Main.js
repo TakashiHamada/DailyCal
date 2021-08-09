@@ -17,6 +17,7 @@ const ssIdList =
         "1hqOwvX204dQaJfUzANnR_87nOdSDknp1IJsbu90ZgAE", // 10, 100までの足し引き算（ゾロ目, 2桁と2桁）
         "1I7PW2L8VLx4ysa9B9ruKCgfM4YKHhmLcPb6luWEYMnM", // 11, 10からの引き算
         "1AaJaYKQvefv3ti1h3-oXQUB5Bw2JE9yonXfwjcOcbqo", // 12, 10からの差
+        "1QIQE3l7ev8TBxriBrNPmU0Y5Nq56lEBRCcDrFLYUZqc", // 13, 答えが奇数
     ];
 
 // --
