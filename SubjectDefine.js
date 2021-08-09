@@ -201,6 +201,12 @@ function diff_from10() {
 }
 
 // 3要素の足し算
-function addition_addition_max10() {
-    
+function addition_addition() {
+    let subject = {};
+    subject.a = Math.floor(Math.random() * 18) + 1; // 1 - 18
+    subject.b = Math.floor(Math.random() * 18) + 1; // 1 - 18
+    subject.c = Math.floor(Math.random() * 18) + 1; // 1 - 18
+    subject.methodType = MethodType.DoubleAddition;
+    subject.answer = a + b + c;
+    return subject;
 }
