@@ -1,3 +1,12 @@
+// 疑似enum
+const MethodType = {
+    SingleAddition : 0,
+    SingleSubtraction : 1,
+    DoubleAddition : 2,
+    DoubleSubtraction : 3,
+    AdditionThenSubtraction : 4,
+    SubtractionThenAddition : 5,
+}
 
 function getSubjectByType(type) {
     switch (type) {
@@ -214,12 +223,16 @@ function answerAdd30() {
 }
 
 // 3要素の足し算
-function addition_addition() {
+function addition_addition30() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 18) + 1; // 1 - 18
     subject.b = Math.floor(Math.random() * 18) + 1; // 1 - 18
     subject.c = Math.floor(Math.random() * 18) + 1; // 1 - 18
     subject.methodType = MethodType.DoubleAddition;
-    subject.answer = a + b + c;
-    return subject;
+    subject.answer = subject.a + subject.b + subject.c;
+    // --
+    if (subject.answer < 30)
+        return subject;
+    // --
+    return null;
 }
