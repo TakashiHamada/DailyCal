@@ -1,3 +1,12 @@
+// 疑似enum
+const MethodType = {
+    SingleAddition : 0,
+    SingleSubtraction : 1,
+    DoubleAddition : 2,
+    DoubleSubtraction : 3,
+    AdditionThenSubtraction : 4,
+    SubtractionThenAddition : 5,
+}
 
 function getSubjectByType(type) {
     switch (type) {
@@ -24,7 +33,8 @@ function addition10() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 8) + 1; // 1 - 8
     subject.b = Math.floor(Math.random() * 8) + 1; // 1 - 8
-    subject.addMode = true; // たしざん
+    subject.methodType = MethodType.SingleAddition;
+    subject.answer = subject.a + subject.b;
     // 答えが10以下
     if (subject.a + subject.b <= 10)
         return subject;
@@ -188,4 +198,9 @@ function diff_from10() {
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.addMode = Math.random() < 0.5; // たしひき算 
     return subject;
+}
+
+// 3要素の足し算
+function addition_addition_max10() {
+    
 }
