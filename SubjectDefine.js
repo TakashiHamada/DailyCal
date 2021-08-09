@@ -14,6 +14,7 @@ function getSubjectByType(type) {
         case 10 : return doublet_1();
         case 11 : return subtraction_from10();
         case 12 : return diff_from10();
+        case 13 : return answerAdd30();
     }
     // 例外
     return null;
@@ -188,4 +189,25 @@ function diff_from10() {
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.addMode = Math.random() < 0.5; // たしひき算 
     return subject;
+}
+
+// オリジナル, 2桁 +- 1桁, 答えが奇数になる, 足し引き算, 答えが0より大きく30未満
+function answerAdd30() {
+    let subject = {};
+    subject.a = (Math.floor(Math.random() * 11)) + 10; // 10 - 20
+    subject.b = (Math.floor(Math.random() * 9) + 1); // 1 - 9
+    subject.addMode = Math.random() < 0.5; // 足し引き算
+    // --
+    let answer = subject.a + (subject.b * (subject.addMode ? 1 : -1));
+    // 制限チェック
+    if (0 < answer && answer < 30) {
+        // 奇数チェック
+        if (answer % 2 === 1) {
+            // 必ず繰り上がり繰り下がりがあるか？
+            if (answer < 10 || ("" + subject.a)[0] !== ("" + answer)[0]) {
+                return subject;
+            }
+        }
+    }
+    return null;
 }
