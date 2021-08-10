@@ -102,7 +102,8 @@ function isSameContent(newOne, oldOne) {
     // --
     return newOne.a === oldOne.a &&
         newOne.b === oldOne.b &&
-        newOne.addMode === oldOne.addMode;
+        newOne.c === oldOne.c &&
+        newOne.methodType === oldOne.methodType;
 }
 
 function createSubject(subject) {
