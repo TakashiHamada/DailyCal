@@ -18,6 +18,8 @@ const ssIdList =
         "1I7PW2L8VLx4ysa9B9ruKCgfM4YKHhmLcPb6luWEYMnM", // 11, 10からの引き算
         "1AaJaYKQvefv3ti1h3-oXQUB5Bw2JE9yonXfwjcOcbqo", // 12, 10からの差
         "1QIQE3l7ev8TBxriBrNPmU0Y5Nq56lEBRCcDrFLYUZqc", // 13, 答えが奇数
+        "15NOA0Q2xaVPscfqFvy-e7HXwa6ePOcPW88pgdw3hsRw", // 14, 3要素の足し算（答え１０以下）
+        "1LyhE1FPqRbjw0SkaUBCk_-mtkAkoMhGIYzZr2oxiKNs", // 15, 3要素の足し算（１０といくつ）
     ];
 
 // --
@@ -107,7 +109,7 @@ function createSubject(subject) {
     let list = [];
     list[0] = "'(" + (subject.idx + 1) + ")";
     // --
-    if (subject.c === null) {
+    if (detectSingle(subject)) {
         list[1] = subject.a;
         list[2] = subject.methodType === MethodType.SingleAddition ? "+" : "-";
         list[3] = subject.b;
@@ -132,13 +134,12 @@ function write(sheet, subjects, mode) {
     // ただし、１行ずつ書き込まれたほうが動いている感じがして子供が喜ぶ
     // --
     let isLeftCol = mode === "LeftCol"; // 読み出し時の可読性を考慮
-    let isSingle = subjects[0].c === null; // 共通である、ことを前提
     let start = isLeftCol ? 0 : 15;
     let end = isLeftCol ? 15 : 30;
     // --
     for (let idx = start; idx < end; idx++) {
         let row = isLeftCol ? (2 * idx) + 3 : (2 * (idx - 15)) + 3;
-        let range = sheet.getRange(row, isLeftCol ? 2 : 13, 1, isSingle ? 5 : 7);
+        let range = sheet.getRange(row, isLeftCol ? 2 : 13, 1, detectSingle(subjects[0]) ? 5 : 7);
         // --
         let values = range.getValues();
         values[0] = createSubject(subjects[idx]);
