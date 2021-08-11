@@ -3,7 +3,7 @@ const ssIdList =
     [
         // スプレッドシートが格納されているフォルダ
         // https://drive.google.com/drive/folders/10usx9Vi9ZLJeLR8zybSbnuV835zqGqky
-
+        // --
         "1GXpdCMm5G8sgu3rNMvMqTBAn-s96g9MvUzDB8FBaOnQ", // 0,  10までの足し算
         "19dqrMTa38sd1caYH2-gCPDDQ4JRdqtggWc_YUrt_j4c", // 1,  20までの足し算（１０といくつ）
         "1yfK-8gVzbcSuaJHMD5w4g6ao-9FsyG8oD9BgvacHb1w", // 2,  20までの足し算（くりあがり）
@@ -20,20 +20,12 @@ const ssIdList =
         "1QIQE3l7ev8TBxriBrNPmU0Y5Nq56lEBRCcDrFLYUZqc", // 13, 答えが奇数
         "15NOA0Q2xaVPscfqFvy-e7HXwa6ePOcPW88pgdw3hsRw", // 14, 3要素の足し算（答え１０以下）
         "1LyhE1FPqRbjw0SkaUBCk_-mtkAkoMhGIYzZr2oxiKNs", // 15, 3要素の足し算（１０といくつ）
+        "1fHx_laOklPrkVFoqnGwvIm1viPCpt2W73E5jFpYQ0Bs", // 16, 3要素の足し引き算
+        "1w743G6KE1Ki0ORvyq0UcWweliCENEvc1ZsnBm7iSLlg", // 17, 3要素の足し算
     ];
 
 // --
-// PDF出力先の表示
-// --
-function showPdfUrl() {
-    const head = "https://docs.google.com/spreadsheets/d/";
-    const end = "/export?format=pdf";
-    for (let idx = 0; idx < ssIdList.length; idx++)
-        console.log(head + ssIdList[idx] + end);
-}
-
-// --
-// 更新, トリガーで指定すること
+// 登録されたスプレッドシートの全更新, 時間トリガーで指定すること
 // --
 function updateAll() {
     for (let idx = 0; idx < ssIdList.length; idx++) {
@@ -51,48 +43,49 @@ function updateAll() {
     console.log("Done");
 }
 
-// --
-// 個別実行用
-// --
-function updateOne() {
-    const idx = 0; // <= param
-    // シート
-    const ss = SpreadsheetApp.openById(ssIdList[idx]);
-    const sheet = ss.getSheetByName("Main");
-    // 日付
-    let date = new Date();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    // --
-    updateEach(idx, sheet, month, day);
-}
-
-function updateEach(type, sheet, month, day) {
+function updateEach(ssIdx, sheet, month, day) {
     // 日付の記入
     sheet.getRange(1, 2).setValue(month);
     sheet.getRange(1, 4).setValue(day);
+    // --
+    let list = [];
+    switch (ssIdx) {
+        default :
+            // 便宜上ssIdxをtypeとして利用する
+            list = makeSubjectList(ssIdx, 30);
+            break;
+        // 基本的に同じssでは1つのtypeを使用するが、複数を使用する例外がある
+        case 16 :
+            list = list.concat(makeSubjectList(-1, 15));
+            list = list.concat(makeSubjectList(-2, 15, list.length)); // idxの継承
+    }
+    // --
+    console.log(list);
+    // --
+    write(sheet, list, "LeftCol");
+    write(sheet, list, "RightCol");
+}
 
+// 必要な分だけリストを作成
+function makeSubjectList(type, amount, inherit = 0) {
+    // 一時的な入れ物
     let list = [];
     let lastSubject = null;
-
-    while (list.length <= 30) {
+    // --
+    while (list.length <= amount - 1) { // 1個多めにできちゃう…
         let subject = getSubjectByType(type);
         // 検査に不合格でないか
         if (subject !== null) {
             // 直前の問題と特定要素が同じではないか
             if (!isSimilarContent(subject, lastSubject)) {
-                subject.idx = list.length; // idxを、むりやり挿入
+                subject.idx = list.length + inherit; // idxを、むりやり挿入
                 list.push(subject);
                 // 重複防止のための入れ物
                 lastSubject = subject;
             }
         }
     }
-
-    console.log(list);
-
-    write(sheet, list, "LeftCol");
-    write(sheet, list, "RightCol");
+    return list;
 }
 
 // idxは対象外なので、要素を一つずつ比べる

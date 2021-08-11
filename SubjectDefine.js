@@ -1,37 +1,26 @@
 function getSubjectByType(type) {
     switch (type) {
-        case  0 :
-            return addition10();
-        case  1 :
-            return addition20_0();
-        case  2 :
-            return addition20_1();
-        case  3 :
-            return addition100_0();
-        case  4 :
-            return addition100_1();
-        case  5 :
-            return subtraction10();
-        case  6 :
-            return subtraction20();
-        case  7 :
-            return subtraction100_0();
-        case  8 :
-            return subtraction100_1();
-        case  9 :
-            return doublet_0();
-        case 10 :
-            return doublet_1();
-        case 11 :
-            return subtraction_from10();
-        case 12 :
-            return diff_from10();
-        case 13 :
-            return answer_add30();
-        case 14 :
-            return addition_addition10();
-        case 15 :
-            return addition_addition20_mix10();
+        // 1つのssで複数のtypeを使うことが可能
+        // typeとssの番号は一致しないが、ほぼ一致するので、便宜上その値を使用している
+        case  0 : return addition10();
+        case  1 : return addition20_0();
+        case  2 : return addition20_1();
+        case  3 : return addition100_0();
+        case  4 : return addition100_1();
+        case  5 : return subtraction10();
+        case  6 : return subtraction20();
+        case  7 : return subtraction100_0();
+        case  8 : return subtraction100_1();
+        case  9 : return doublet_0();
+        case 10 : return doublet_1();
+        case 11 : return subtraction_from10();
+        case 12 : return diff_from10();
+        case 13 : return answer_add30();
+        case 14 : return addition_addition10();
+        case 15 : return addition_addition20_mix10();
+        case -1 : return subtraction_addition_20(); // 混合は-を使用する
+        case -2 : return addition_subtraction_20(); // 混合は-を使用する
+        case 17 : return subtraction_subtraction_20();
     }
     // 例外
     return null;
@@ -273,10 +262,11 @@ function addition_addition20_mix10() {
     return null;
 }
 
-// 左 - +, 右 + -, <= 20, 1-2 + 1 + 1
+// 左 - +, 右 + -, <= 20, 1-2桁 + 1桁 + 1桁
+// 左列
 function subtraction_addition_20() {
     let subject = {};
-    subject.a = Math.floor(Math.random() * 19) + 2; // 2 - 20
+    subject.a = Math.floor(Math.random() * 16) + 5; // 5 - 20
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.c = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.methodType = MethodType.SubtractionThenAddition;
@@ -288,9 +278,10 @@ function subtraction_addition_20() {
     return null;
 }
 
+// 右列
 function addition_subtraction_20() {
     let subject = {};
-    subject.a = Math.floor(Math.random() * 20) + 1; // 1 - 20
+    subject.a = Math.floor(Math.random() * 15) + 1; // 1 - 15
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.c = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.methodType = MethodType.AdditionThenSubtraction;
@@ -302,7 +293,7 @@ function addition_subtraction_20() {
     return null;
 }
 
-// a - b - c = 1桁, 1-2 - 1 - 1
+// a - b - c = 1桁, 1-2桁- 1桁 - 1桁
 function subtraction_subtraction_20() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 18) + 3; // 3 - 20
@@ -311,7 +302,7 @@ function subtraction_subtraction_20() {
     subject.methodType = MethodType.DoubleSubtraction;
     subject.answer = subject.a - subject.b - subject.c;
     // --
-    if (subject.answer <= 10)
+    if (0 <= subject.answer && subject.answer < 10)
         return subject;
     // --
     return null;
