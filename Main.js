@@ -21,7 +21,7 @@ const ssIdList =
         "15NOA0Q2xaVPscfqFvy-e7HXwa6ePOcPW88pgdw3hsRw", // 14, 3要素の足し算（答え１０以下）
         "1LyhE1FPqRbjw0SkaUBCk_-mtkAkoMhGIYzZr2oxiKNs", // 15, 3要素の足し算（１０といくつ）
         "1fHx_laOklPrkVFoqnGwvIm1viPCpt2W73E5jFpYQ0Bs", // 16, 3要素の足し引き算
-        "1w743G6KE1Ki0ORvyq0UcWweliCENEvc1ZsnBm7iSLlg", // 17, 3要素の足し算
+        "1w743G6KE1Ki0ORvyq0UcWweliCENEvc1ZsnBm7iSLlg", // 17, 3要素の引き算
     ];
 
 // --
