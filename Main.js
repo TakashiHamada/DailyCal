@@ -51,31 +51,25 @@ function updateAll() {
     console.log("Done");
 }
 
-// --
-// 個別実行用
-// --
-function updateOne() {
-    const idx = 0; // <= param
-    // シート
-    const ss = SpreadsheetApp.openById(ssIdList[idx]);
-    const sheet = ss.getSheetByName("Main");
-    // 日付
-    let date = new Date();
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    // --
-    updateEach(idx, sheet, month, day);
-}
-
 function updateEach(type, sheet, month, day) {
     // 日付の記入
     sheet.getRange(1, 2).setValue(month);
     sheet.getRange(1, 4).setValue(day);
 
+    let list = makeSubjectList(type, 30);
+    console.log(list);
+
+    write(sheet, list, "LeftCol");
+    write(sheet, list, "RightCol");
+}
+
+// 必要な分だけリストを作成
+function makeSubjectList(type, amount ) {
+    // 一時的な入れ物
     let list = [];
     let lastSubject = null;
-
-    while (list.length <= 30) {
+    // --
+    while (list.length <= amount) {
         let subject = getSubjectByType(type);
         // 検査に不合格でないか
         if (subject !== null) {
@@ -88,11 +82,7 @@ function updateEach(type, sheet, month, day) {
             }
         }
     }
-
-    console.log(list);
-
-    write(sheet, list, "LeftCol");
-    write(sheet, list, "RightCol");
+    return list;
 }
 
 // idxは対象外なので、要素を一つずつ比べる

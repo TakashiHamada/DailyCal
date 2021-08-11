@@ -274,9 +274,10 @@ function addition_addition20_mix10() {
 }
 
 // 左 - +, 右 + -, <= 20, 1-2 + 1 + 1
+// 左列
 function subtraction_addition_20() {
     let subject = {};
-    subject.a = Math.floor(Math.random() * 19) + 2; // 2 - 20
+    subject.a = Math.floor(Math.random() * 16) + 5; // 5 - 20
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.c = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.methodType = MethodType.SubtractionThenAddition;
@@ -288,9 +289,10 @@ function subtraction_addition_20() {
     return null;
 }
 
+// 右列
 function addition_subtraction_20() {
     let subject = {};
-    subject.a = Math.floor(Math.random() * 20) + 1; // 1 - 20
+    subject.a = Math.floor(Math.random() * 15) + 1; // 1 - 15
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.c = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.methodType = MethodType.AdditionThenSubtraction;
