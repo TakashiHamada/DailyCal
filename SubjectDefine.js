@@ -1,20 +1,37 @@
-
 function getSubjectByType(type) {
     switch (type) {
-        case  0 : return addition10();
-        case  1 : return addition20_0();
-        case  2 : return addition20_1();
-        case  3 : return addition100_0();
-        case  4 : return addition100_1();
-        case  5 : return subtraction10();
-        case  6 : return subtraction20();
-        case  7 : return subtraction100_0();
-        case  8 : return subtraction100_1();
-        case  9 : return doublet_0();
-        case 10 : return doublet_1();
-        case 11 : return subtraction_from10();
-        case 12 : return diff_from10();
-        case 13 : return answerAdd30();
+        case  0 :
+            return addition10();
+        case  1 :
+            return addition20_0();
+        case  2 :
+            return addition20_1();
+        case  3 :
+            return addition100_0();
+        case  4 :
+            return addition100_1();
+        case  5 :
+            return subtraction10();
+        case  6 :
+            return subtraction20();
+        case  7 :
+            return subtraction100_0();
+        case  8 :
+            return subtraction100_1();
+        case  9 :
+            return doublet_0();
+        case 10 :
+            return doublet_1();
+        case 11 :
+            return subtraction_from10();
+        case 12 :
+            return diff_from10();
+        case 13 :
+            return answer_add30();
+        case 14 :
+            return addition_addition10();
+        case 15 :
+            return addition_addition20_mix10();
     }
     // 例外
     return null;
@@ -25,7 +42,8 @@ function addition10() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 8) + 1; // 1 - 8
     subject.b = Math.floor(Math.random() * 8) + 1; // 1 - 8
-    subject.addMode = true; // たしざん
+    subject.methodType = MethodType.SingleAddition;
+    subject.answer = subject.a + subject.b;
     // 答えが10以下
     if (subject.a + subject.b <= 10)
         return subject;
@@ -37,8 +55,9 @@ function addition10() {
 function addition20_0() {
     let subject = {};
     subject.a = 10;
-    subject.b = Math.floor(Math.random() * 8) + 1; // 1 - 8
-    subject.addMode = true; // たしざん
+    subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.methodType = MethodType.SingleAddition;
+    subject.answer = subject.a + subject.b;
     return subject;
 }
 
@@ -46,10 +65,10 @@ function addition20_1() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 10); // 0 - 9
     subject.b = Math.floor(Math.random() * 10); // 0 - 9
-    subject.addMode = true; // たしざん
+    subject.methodType = MethodType.SingleAddition;
+    subject.answer = subject.a + subject.b;
     // 検査, 繰り上がるか？
-    let chk = subject.a + subject.b;
-    if (10 <= chk)
+    if (10 <= subject.answer)
         return subject;
     // --
     return null;
@@ -60,9 +79,10 @@ function addition100_0() {
     let subject = {};
     subject.a = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
     subject.b = (Math.floor(Math.random() * 9) * 10) + 10; // 10 - 90
-    subject.addMode = true; // たしざん
+    subject.methodType = MethodType.SingleAddition;
+    subject.answer = subject.a + subject.b;
     // 100まで
-    if (subject.a + subject.b <= 100)
+    if (subject.answer <= 100)
         return subject;
     // --
     return null;
@@ -73,19 +93,16 @@ function addition100_1() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 71) + 21; // 21 - 91
     subject.b = Math.floor(Math.random() * 8) + 2; // 2 - 9
-    subject.addMode = true; // たしざん
-    // 最大100
-    if (subject.a - subject.b <= 100)
-        return subject;
-    // --
-    return null;
+    subject.methodType = MethodType.SingleAddition;
+    subject.answer = subject.a + subject.b;
+    return subject;
 }
 
 function subtraction10() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.b = Math.floor(Math.random() * 10); // 0 - 9
-    subject.addMode = false; // ひきざん
+    subject.methodType = MethodType.SingleSubtraction;
     // 検査, マイナスになるか？
     if (subject.a < subject.b) {
         // ひっくり返す
@@ -93,11 +110,10 @@ function subtraction10() {
         subject.b = subject.a;
     }
     // 答えが少ない数字の場合は、不合格にするときもある
-    var answer = subject.a - subject.b;
-    if (answer === 0) {
+    subject.answer = subject.a - subject.b;
+    if (subject.answer === 0) {
         if (Math.random() < 0.9) return null;
-    }
-    else if(answer <= 3) {
+    } else if (subject.answer <= 3) {
         if (Math.random() < 0.5) return null;
     }
     return subject;
@@ -105,12 +121,12 @@ function subtraction10() {
 
 function subtraction20() {
     let subject = {};
-    subject.a = Math.floor(Math.random() * 9) + 10; // 10 - 18
-    subject.b = Math.floor(Math.random() * 7) + 3; // 3 - 9
-    subject.addMode = false; // ひきざん
+    subject.a = Math.floor(Math.random() * 8) + 11; // 11 - 18
+    subject.b = Math.floor(Math.random() * 8) + 2; // 2 - 9
+    subject.methodType = MethodType.SingleSubtraction;
     // 検査, 繰り下がるか？
-    let chk = subject.a - subject.b;
-    if (0 < chk && chk < 10)
+    subject.answer = subject.a - subject.b;
+    if (0 < subject.answer && subject.answer < 10)
         return subject;
     // --
     return null;
@@ -121,7 +137,8 @@ function subtraction100_0() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 71) + 21; // 21 - 91
     subject.b = Math.floor(Math.random() * 8) + 2; // 2 - 9
-    subject.addMode = false; // ひきざん
+    subject.methodType = MethodType.SingleSubtraction;
+    subject.answer = subject.a - subject.b;
     return subject;
 }
 
@@ -130,13 +147,14 @@ function subtraction100_1() {
     let subject = {};
     subject.a = (Math.floor(Math.random() * 8) * 10) + 30; // 30 - 100
     subject.b = (Math.floor(Math.random() * 8) * 10) + 10; // 10 - 80
-    subject.addMode = false; // ひきざん
+    subject.methodType = MethodType.SingleSubtraction;
     // 検査, マイナスになるか？
     if (subject.a < subject.b) {
         // ひっくり返す
         subject.a = subject.b;
         subject.b = subject.a;
     }
+    subject.answer = subject.a - subject.b;
     return subject;
 }
 
@@ -144,12 +162,14 @@ function subtraction100_1() {
 function doublet_0() {
     let origin = (Math.floor(Math.random() * 9) + 1) + ""; // 1 - 9
     let answer = parseInt(origin + origin); // 11 - 99
-    let addMode = Math.random() < 0.5;
+    let methodType = Math.random() < 0.5 ?
+        MethodType.SingleAddition : MethodType.SingleSubtraction;
     // --
     let subject = {};
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
-    subject.a = answer + (subject.b * (addMode ? -1 : 1));
-    subject.addMode = addMode;
+    subject.a = answer - (subject.b * getCul(methodType));
+    subject.methodType = methodType;
+    subject.answer = answer;
     if (subject.a < 100)
         return subject;
     // --
@@ -160,12 +180,14 @@ function doublet_0() {
 function doublet_1() {
     let origin = (Math.floor(Math.random() * 9) + 1) + ""; // 1 - 9
     let answer = parseInt(origin + origin); // 11 - 99
-    let addMode = Math.random() < 0.5;
+    let methodType = Math.random() < 0.5 ?
+        MethodType.SingleAddition : MethodType.SingleSubtraction;
     // --
     let subject = {};
     subject.b = Math.floor(Math.random() * 80) + 10; // 11 - 89
-    subject.a = answer + (subject.b * (addMode ? -1 : 1));
-    subject.addMode = addMode;
+    subject.a = answer - (subject.b * getCul(methodType));
+    subject.methodType = methodType;
+    subject.answer = answer;
     // --
     if (10 < subject.a && subject.a < 100)
         return subject;
@@ -178,7 +200,8 @@ function subtraction_from10() {
     let subject = {};
     subject.a = 10;
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
-    subject.addMode = false;
+    subject.methodType = MethodType.SingleSubtraction;
+    subject.answer = subject.a - subject.b;
     return subject;
 }
 
@@ -187,18 +210,21 @@ function diff_from10() {
     let subject = {};
     subject.a = 10;
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
-    subject.addMode = Math.random() < 0.5; // たしひき算 
+    subject.methodType = Math.random() < 0.5 ?
+        MethodType.SingleAddition : MethodType.SingleSubtraction;
+    subject.answer = subject.a + (subject.b * getCul(subject.methodType));
     return subject;
 }
 
 // オリジナル, 2桁 +- 1桁, 答えが奇数になる, 足し引き算, 答えが0より大きく30未満
-function answerAdd30() {
+function answer_add30() {
     let subject = {};
     subject.a = (Math.floor(Math.random() * 11)) + 10; // 10 - 20
     subject.b = (Math.floor(Math.random() * 9) + 1); // 1 - 9
-    subject.addMode = Math.random() < 0.5; // 足し引き算
+    subject.methodType = Math.random() < 0.5 ?
+        MethodType.SingleAddition : MethodType.SingleSubtraction;
     // --
-    let answer = subject.a + (subject.b * (subject.addMode ? 1 : -1));
+    let answer = subject.a + (subject.b * getCul(subject.methodType));
     // 制限チェック
     if (0 < answer && answer < 30) {
         // 奇数チェック
@@ -209,5 +235,84 @@ function answerAdd30() {
             }
         }
     }
+    return null;
+}
+
+// 3つの要素, a + b + c <= 10
+function addition_addition10() {
+    let subject = {};
+    subject.a = Math.floor(Math.random() * 8) + 1; // 1 - 8
+    subject.b = Math.floor(Math.random() * 8) + 1; // 1 - 8
+    subject.c = Math.floor(Math.random() * 8) + 1; // 1 - 8
+    subject.methodType = MethodType.DoubleAddition;
+    subject.answer = subject.a + subject.b + subject.c;
+    // --
+    if (subject.answer <= 10)
+        return subject;
+    // --
+    return null;
+}
+
+// 3つの要素, a + b + c <= 20, 2要素で必ず10
+function addition_addition20_mix10() {
+    let subject = {};
+    subject.a = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.c = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.methodType = MethodType.DoubleAddition;
+    subject.answer = subject.a + subject.b + subject.c;
+    // --
+    if (subject.answer <= 20) {
+        // ab, ac, bc
+        if (subject.a + subject.b === 10 ||
+            subject.a + subject.c === 10 ||
+            subject.b + subject.c === 10)
+            return subject;
+    }
+    // --
+    return null;
+}
+
+// 左 - +, 右 + -, <= 20, 1-2 + 1 + 1
+function subtraction_addition_20() {
+    let subject = {};
+    subject.a = Math.floor(Math.random() * 19) + 2; // 2 - 20
+    subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.c = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.methodType = MethodType.SubtractionThenAddition;
+    subject.answer = subject.a - subject.b + subject.c;
+    // --
+    if (subject.answer <= 20)
+        return subject;
+    // --
+    return null;
+}
+
+function addition_subtraction_20() {
+    let subject = {};
+    subject.a = Math.floor(Math.random() * 20) + 1; // 1 - 20
+    subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.c = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.methodType = MethodType.AdditionThenSubtraction;
+    subject.answer = subject.a + subject.b - subject.c;
+    // --
+    if (subject.answer <= 20)
+        return subject;
+    // --
+    return null;
+}
+
+// a - b - c = 1桁, 1-2 - 1 - 1
+function subtraction_subtraction_20() {
+    let subject = {};
+    subject.a = Math.floor(Math.random() * 18) + 3; // 3 - 20
+    subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.c = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.methodType = MethodType.DoubleSubtraction;
+    subject.answer = subject.a - subject.b - subject.c;
+    // --
+    if (subject.answer <= 10)
+        return subject;
+    // --
     return null;
 }

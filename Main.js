@@ -3,7 +3,7 @@ const ssIdList =
     [
         // スプレッドシートが格納されているフォルダ
         // https://drive.google.com/drive/folders/10usx9Vi9ZLJeLR8zybSbnuV835zqGqky
-        
+
         "1GXpdCMm5G8sgu3rNMvMqTBAn-s96g9MvUzDB8FBaOnQ", // 0,  10までの足し算
         "19dqrMTa38sd1caYH2-gCPDDQ4JRdqtggWc_YUrt_j4c", // 1,  20までの足し算（１０といくつ）
         "1yfK-8gVzbcSuaJHMD5w4g6ao-9FsyG8oD9BgvacHb1w", // 2,  20までの足し算（くりあがり）
@@ -18,6 +18,8 @@ const ssIdList =
         "1I7PW2L8VLx4ysa9B9ruKCgfM4YKHhmLcPb6luWEYMnM", // 11, 10からの引き算
         "1AaJaYKQvefv3ti1h3-oXQUB5Bw2JE9yonXfwjcOcbqo", // 12, 10からの差
         "1QIQE3l7ev8TBxriBrNPmU0Y5Nq56lEBRCcDrFLYUZqc", // 13, 答えが奇数
+        "15NOA0Q2xaVPscfqFvy-e7HXwa6ePOcPW88pgdw3hsRw", // 14, 3要素の足し算（答え１０以下）
+        "1LyhE1FPqRbjw0SkaUBCk_-mtkAkoMhGIYzZr2oxiKNs", // 15, 3要素の足し算（１０といくつ）
     ];
 
 // --
@@ -78,7 +80,7 @@ function updateEach(type, sheet, month, day) {
         // 検査に不合格でないか
         if (subject !== null) {
             // 直前の問題と特定要素が同じではないか
-            if (!isSameContent(subject, lastSubject)) {
+            if (!isSimilarContent(subject, lastSubject)) {
                 subject.idx = list.length; // idxを、むりやり挿入
                 list.push(subject);
                 // 重複防止のための入れ物
@@ -94,27 +96,47 @@ function updateEach(type, sheet, month, day) {
 }
 
 // idxは対象外なので、要素を一つずつ比べる
-function isSameContent(newOne, oldOne) {
+function isSimilarContent(newOne, oldOne) {
     // nullチェック
     if (oldOne === null) return false;
     // --
+    // 答えが同じ場合も、一定確率ではじく
+    if (newOne.answer === oldOne.answer)
+        if (Math.random() < 0.5)
+            return true;
+    // --
+    // 完全一致？（idxを除く）
     return newOne.a === oldOne.a &&
         newOne.b === oldOne.b &&
-        newOne.addMode === oldOne.addMode;
+        newOne.c === oldOne.c && // 2要素の場合、undefined
+        newOne.methodType === oldOne.methodType;
 }
 
 function createSubject(subject) {
     let list = [];
     list[0] = "'(" + (subject.idx + 1) + ")";
-    list[1] = subject.a;
-    list[2] = subject.addMode ? "+" : "-";
-    list[3] = subject.b;
-    list[4] = "'=";
+    // --
+    if (detectSingle(subject)) {
+        list[1] = subject.a;
+        list[2] = subject.methodType === MethodType.SingleAddition ? "+" : "-";
+        list[3] = subject.b;
+        list[4] = "'=";
+    } else {
+        list[1] = subject.a;
+        list[2] = (subject.methodType === MethodType.DoubleAddition ||
+            subject.methodType === MethodType.AdditionThenSubtraction) ? "+" : "-";
+        list[3] = subject.b;
+        list[4] = (subject.methodType === MethodType.DoubleAddition ||
+            subject.methodType === MethodType.SubtractionThenAddition) ? "+" : "-";
+        list[5] = subject.c;
+        list[6] = "'=";
+    }
+
     return list;
 }
 
 // 書き込み用
-function write(sheet, list, mode) {
+function write(sheet, subjects, mode) {
     // 注意, 1行ずつの書き込みは遅いので、増えた場合は一括にすること
     // ただし、１行ずつ書き込まれたほうが動いている感じがして子供が喜ぶ
     // --
@@ -124,10 +146,10 @@ function write(sheet, list, mode) {
     // --
     for (let idx = start; idx < end; idx++) {
         let row = isLeftCol ? (2 * idx) + 3 : (2 * (idx - 15)) + 3;
-        let range = sheet.getRange(row, isLeftCol ? 2 : 13, 1, 5);
+        let range = sheet.getRange(row, isLeftCol ? 2 : 13, 1, detectSingle(subjects[0]) ? 5 : 7);
         // --
         let values = range.getValues();
-        values[0] = createSubject(list[idx]);
+        values[0] = createSubject(subjects[idx]);
         range.setValues(values); // <= 書き込み
     }
 }
