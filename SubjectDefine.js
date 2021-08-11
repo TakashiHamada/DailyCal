@@ -1,37 +1,21 @@
 function getSubjectByType(type) {
     switch (type) {
-        case  0 :
-            return addition10();
-        case  1 :
-            return addition20_0();
-        case  2 :
-            return addition20_1();
-        case  3 :
-            return addition100_0();
-        case  4 :
-            return addition100_1();
-        case  5 :
-            return subtraction10();
-        case  6 :
-            return subtraction20();
-        case  7 :
-            return subtraction100_0();
-        case  8 :
-            return subtraction100_1();
-        case  9 :
-            return doublet_0();
-        case 10 :
-            return doublet_1();
-        case 11 :
-            return subtraction_from10();
-        case 12 :
-            return diff_from10();
-        case 13 :
-            return answer_add30();
-        case 14 :
-            return addition_addition10();
-        case 15 :
-            return addition_addition20_mix10();
+        case  0 : return addition10();
+        case  1 : return addition20_0();
+        case  2 : return addition20_1();
+        case  3 : return addition100_0();
+        case  4 : return addition100_1();
+        case  5 : return subtraction10();
+        case  6 : return subtraction20();
+        case  7 : return subtraction100_0();
+        case  8 : return subtraction100_1();
+        case  9 : return doublet_0();
+        case 10 : return doublet_1();
+        case 11 : return subtraction_from10();
+        case 12 : return diff_from10();
+        case 13 : return answer_add30();
+        case 14 : return addition_addition10();
+        case 15 : return addition_addition20_mix10();
     }
     // 例外
     return null;

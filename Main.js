@@ -23,16 +23,6 @@ const ssIdList =
     ];
 
 // --
-// PDF出力先の表示
-// --
-function showPdfUrl() {
-    const head = "https://docs.google.com/spreadsheets/d/";
-    const end = "/export?format=pdf";
-    for (let idx = 0; idx < ssIdList.length; idx++)
-        console.log(head + ssIdList[idx] + end);
-}
-
-// --
 // 更新, トリガーで指定すること
 // --
 function updateAll() {
