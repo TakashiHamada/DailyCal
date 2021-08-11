@@ -1,5 +1,7 @@
 function getSubjectByType(type) {
     switch (type) {
+        // 1つのssで複数のtypeを使うことが可能
+        // typeとssの番号は一致しないが、ほぼ一致するので、便宜上その値を使用している
         case  0 : return addition10();
         case  1 : return addition20_0();
         case  2 : return addition20_1();
@@ -16,6 +18,9 @@ function getSubjectByType(type) {
         case 13 : return answer_add30();
         case 14 : return addition_addition10();
         case 15 : return addition_addition20_mix10();
+        case -1 : return subtraction_addition_20(); // 混合は-を使用する
+        case -2 : return addition_subtraction_20(); // 混合は-を使用する
+        case 17 : return subtraction_subtraction_20();
     }
     // 例外
     return null;
@@ -257,7 +262,7 @@ function addition_addition20_mix10() {
     return null;
 }
 
-// 左 - +, 右 + -, <= 20, 1-2 + 1 + 1
+// 左 - +, 右 + -, <= 20, 1-2桁 + 1桁 + 1桁
 // 左列
 function subtraction_addition_20() {
     let subject = {};
@@ -288,7 +293,7 @@ function addition_subtraction_20() {
     return null;
 }
 
-// a - b - c = 1桁, 1-2 - 1 - 1
+// a - b - c = 1桁, 1-2桁- 1桁 - 1桁
 function subtraction_subtraction_20() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 18) + 3; // 3 - 20
@@ -297,7 +302,7 @@ function subtraction_subtraction_20() {
     subject.methodType = MethodType.DoubleSubtraction;
     subject.answer = subject.a - subject.b - subject.c;
     // --
-    if (subject.answer <= 10)
+    if (0 <= subject.answer && subject.answer < 10)
         return subject;
     // --
     return null;
