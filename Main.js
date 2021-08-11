@@ -80,7 +80,7 @@ function updateEach(type, sheet, month, day) {
         // 検査に不合格でないか
         if (subject !== null) {
             // 直前の問題と特定要素が同じではないか
-            if (!isSameContent(subject, lastSubject)) {
+            if (!isSimilarContent(subject, lastSubject)) {
                 subject.idx = list.length; // idxを、むりやり挿入
                 list.push(subject);
                 // 重複防止のための入れ物
@@ -96,13 +96,19 @@ function updateEach(type, sheet, month, day) {
 }
 
 // idxは対象外なので、要素を一つずつ比べる
-function isSameContent(newOne, oldOne) {
+function isSimilarContent(newOne, oldOne) {
     // nullチェック
     if (oldOne === null) return false;
     // --
+    // 答えが同じ場合も、一定確率ではじく
+    if (newOne.answer === oldOne.answer)
+        if (Math.random() < 0.5)
+            return true;
+    // --
+    // 完全一致？（idxを除く）
     return newOne.a === oldOne.a &&
         newOne.b === oldOne.b &&
-        newOne.c === oldOne.c &&
+        newOne.c === oldOne.c && // 2要素の場合、undefined
         newOne.methodType === oldOne.methodType;
 }
 
