@@ -78,14 +78,23 @@ function addition100_0() {
     return null;
 }
 
-// 2桁＋1桁, 繰り上がりの有無どちらも含む
+// 2桁＋1桁, 繰り上がり無し
 function addition100_1() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 71) + 21; // 21 - 91
+    // 1桁が大きくなる確率を下げたい
+    if (5 <= subject.a % 10) {
+        if (Math.random() < 0.333)
+            return null;
+    }
     subject.b = Math.floor(Math.random() * 8) + 2; // 2 - 9
     subject.methodType = MethodType.SingleAddition;
     subject.answer = subject.a + subject.b;
-    return subject;
+    // 桁が変わらないか確認
+    if (Math.floor(subject.a * 0.1) === Math.floor(subject.answer * 0.1))
+        return subject;
+    // --
+    return null;
 }
 
 function subtraction10() {
@@ -122,14 +131,24 @@ function subtraction20() {
     return null;
 }
 
-// 2桁＋1桁, 繰り上がりの有無どちらも含む
+// 2桁＋1桁, 繰り下がり無し
 function subtraction100_0() {
     let subject = {};
     subject.a = Math.floor(Math.random() * 71) + 21; // 21 - 91
+    // 1桁が小さい確率を下げたい
+    if (subject.a % 10 <= 5) {
+        if (Math.random() < 0.333)
+            return null;
+    }
+    // --
     subject.b = Math.floor(Math.random() * 8) + 2; // 2 - 9
     subject.methodType = MethodType.SingleSubtraction;
     subject.answer = subject.a - subject.b;
-    return subject;
+    // 桁が変わらないか確認
+    if (Math.floor(subject.a * 0.1) === Math.floor(subject.answer * 0.1))
+        return subject;
+    // --
+    return null;
 }
 
 // 100までの引き算, 10単位の簡単な引き算
@@ -273,7 +292,8 @@ function subtraction_addition_20() {
     subject.methodType = MethodType.SubtractionThenAddition;
     subject.answer = subject.a - subject.b + subject.c;
     // --
-    if (subject.answer <= 20)
+    if (0 <= subject.answer && subject.answer < 20
+        && subject.b < subject.a && subject.c < subject.a)
         return subject;
     // --
     return null;
@@ -288,7 +308,8 @@ function addition_subtraction_20() {
     subject.methodType = MethodType.AdditionThenSubtraction;
     subject.answer = subject.a + subject.b - subject.c;
     // --
-    if (subject.answer <= 20)
+    if (0 <= subject.answer && subject.answer < 20
+        && subject.b < subject.a && subject.c < subject.a)
         return subject;
     // --
     return null;

@@ -56,11 +56,11 @@ function updateEach(ssIdx, sheet, month, day) {
             list = makeSubjectList(ssIdx, 30);
             break;
         // 基本的に同じssでは1つのtypeを使用するが、複数を使用する例外がある
-        case 16 :
+        case 16 : // 行で問題を変える
             list = list.concat(makeSubjectList(-1, 15));
             list = list.concat(makeSubjectList(-2, 15, list.length)); // idxの継承
             break;
-        case 18 :
+        case 18 : // まとめ問題
             list = list.concat(makeSubjectList( 0, 3));
             list = list.concat(makeSubjectList( 2, 3, list.length));
             list = list.concat(makeSubjectList( 5, 3, list.length));
