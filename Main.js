@@ -22,6 +22,7 @@ const ssIdList =
         "1LyhE1FPqRbjw0SkaUBCk_-mtkAkoMhGIYzZr2oxiKNs", // 15, 3要素の足し算（１０といくつ）
         "1fHx_laOklPrkVFoqnGwvIm1viPCpt2W73E5jFpYQ0Bs", // 16, 3要素の足し引き算
         "1w743G6KE1Ki0ORvyq0UcWweliCENEvc1ZsnBm7iSLlg", // 17, 3要素の引き算
+        "1VqxtBgBaPVCzs9fZaqUuErM_MPycIUl7gcMbTLrMB2w", // 18, 復習, 全10種類
     ];
 
 // --
@@ -58,6 +59,19 @@ function updateEach(ssIdx, sheet, month, day) {
         case 16 :
             list = list.concat(makeSubjectList(-1, 15));
             list = list.concat(makeSubjectList(-2, 15, list.length)); // idxの継承
+            break;
+        case 18 :
+            list = list.concat(makeSubjectList( 0, 3));
+            list = list.concat(makeSubjectList( 2, 3, list.length));
+            list = list.concat(makeSubjectList( 5, 3, list.length));
+            list = list.concat(makeSubjectList( 6, 3, list.length));
+            list = list.concat(makeSubjectList( 3, 3, list.length));
+            list = list.concat(makeSubjectList( 8, 3, list.length));
+            list = list.concat(makeSubjectList(15, 3, list.length));
+            list = list.concat(makeSubjectList(17, 3, list.length));
+            list = list.concat(makeSubjectList(-1, 3, list.length));
+            list = list.concat(makeSubjectList(-2, 3, list.length));
+            break;
     }
     // --
     console.log(list);
@@ -139,7 +153,7 @@ function write(sheet, subjects, mode) {
     // --
     for (let idx = start; idx < end; idx++) {
         let row = isLeftCol ? (2 * idx) + 3 : (2 * (idx - 15)) + 3;
-        let range = sheet.getRange(row, isLeftCol ? 2 : 13, 1, detectSingle(subjects[0]) ? 5 : 7);
+        let range = sheet.getRange(row, isLeftCol ? 2 : 13, 1, detectSingle(subjects[idx]) ? 5 : 7);
         // --
         let values = range.getValues();
         values[0] = createSubject(subjects[idx]);

@@ -21,6 +21,7 @@ function getSubjectByType(type) {
         case -1 : return subtraction_addition_20(); // 混合は-を使用する
         case -2 : return addition_subtraction_20(); // 混合は-を使用する
         case 17 : return subtraction_subtraction_20();
+        // case 18 : return null; // 18は欠番
     }
     // 例外
     return null;
@@ -134,8 +135,8 @@ function subtraction100_0() {
 // 100までの引き算, 10単位の簡単な引き算
 function subtraction100_1() {
     let subject = {};
-    subject.a = (Math.floor(Math.random() * 8) * 10) + 30; // 30 - 100
-    subject.b = (Math.floor(Math.random() * 8) * 10) + 10; // 10 - 80
+    subject.a = (Math.floor(Math.random() * 6) * 10) + 30; // 30 - 90
+    subject.b = (Math.floor(Math.random() * 7) * 10) + 10; // 10 - 70
     subject.methodType = MethodType.SingleSubtraction;
     // 検査, マイナスになるか？
     if (subject.a < subject.b) {
