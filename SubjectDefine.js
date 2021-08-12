@@ -233,13 +233,24 @@ function answer_add30() {
     subject.methodType = Math.random() < 0.5 ?
         MethodType.SingleAddition : MethodType.SingleSubtraction;
     // --
+    // 足し算のときは、たまにひっくり返す
+    const a = subject.a;
+    const b = subject.b;
+    if (subject.methodType === MethodType.SingleAddition) {
+        if (Math.random() < 0.5) {
+            subject.a = b;
+            subject.b = a;
+        }
+    }
+    // --
     let answer = subject.a + (subject.b * getCul(subject.methodType));
     // 制限チェック
     if (0 < answer && answer < 30) {
         // 奇数チェック
         if (answer % 2 === 1) {
             // 必ず繰り上がり繰り下がりがあるか？
-            if (answer < 10 || ("" + subject.a)[0] !== ("" + answer)[0]) {
+            // ひっくり返す前の2桁の数（つまりa）で判定する
+            if (answer < 10 || ("" + a)[0] !== ("" + answer)[0]) {
                 return subject;
             }
         }
