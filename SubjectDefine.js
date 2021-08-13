@@ -225,10 +225,10 @@ function diff_from10() {
     return subject;
 }
 
-// オリジナル, 2桁 +- 1桁, 答えが奇数になる, 足し引き算, 答えが0より大きく30未満
+// オリジナル, 答えが奇数になる, 足し引き算, 答えが0より大きく30未満
 function answer_add30() {
     let subject = {};
-    subject.a = (Math.floor(Math.random() * 11)) + 10; // 10 - 20
+    subject.a = (Math.floor(Math.random() * 9)) + 11; // 11 - 19
     subject.b = (Math.floor(Math.random() * 9) + 1); // 1 - 9
     subject.methodType = Math.random() < 0.5 ?
         MethodType.SingleAddition : MethodType.SingleSubtraction;
