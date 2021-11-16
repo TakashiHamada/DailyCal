@@ -22,6 +22,7 @@ function getSubjectByType(type) {
         case -2 : return addition_subtraction_20(); // 混合は-を使用する
         case 17 : return subtraction_subtraction_20();
         // case 18 : return null; // 18は欠番
+        case 19 : return subtraction_minos();
     }
     // 例外
     return null;
@@ -336,6 +337,20 @@ function subtraction_subtraction_20() {
     subject.answer = subject.a - subject.b - subject.c;
     // --
     if (0 <= subject.answer && subject.answer < 10)
+        return subject;
+    // --
+    return null;
+}
+
+// 答えがマイナスになる -1 - -99
+function subtraction_minos() {
+    let subject = {};
+    subject.a = Math.floor(Math.random() * 50); // 0 - 49
+    subject.b = Math.floor(Math.random() * 95) + 5; // 5 - 99
+    subject.methodType = MethodType.SingleSubtraction;
+    subject.answer = subject.a - subject.b;
+    // --
+    if (subject.answer < 0)
         return subject;
     // --
     return null;
