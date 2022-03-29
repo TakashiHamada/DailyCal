@@ -2,7 +2,7 @@
 const ssIdList =
     [
         // スプレッドシートが格納されているフォルダ
-        // https://drive.google.com/drive/folders/10usx9Vi9ZLJeLR8zybSbnuV835zqGqky
+        // https://drive.google.com/drive/folders/1HSuGgWIQd-LiBEnlXlIljsrjNwWNPDLo
         // --
         "1GXpdCMm5G8sgu3rNMvMqTBAn-s96g9MvUzDB8FBaOnQ", // 0,  10までの足し算
         "19dqrMTa38sd1caYH2-gCPDDQ4JRdqtggWc_YUrt_j4c", // 1,  20までの足し算（１０といくつ）
