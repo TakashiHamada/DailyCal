@@ -2,7 +2,7 @@
 // 個別実行用
 // --
 function test_updateOne() {
-    const idx = 0; // <= param
+    const idx = 20; // <= param
     // シート
     const ss = SpreadsheetApp.openById(ssIdList[idx]);
     const sheet = ss.getSheetByName("Main");

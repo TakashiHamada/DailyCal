@@ -6,6 +6,7 @@ const MethodType = {
     DoubleSubtraction: 3,
     AdditionThenSubtraction: 4,
     SubtractionThenAddition: 5,
+    SingleMultiplication: 6,
 }
 
 function getCul(methodType, idx) {
@@ -27,4 +28,17 @@ function getCul(methodType, idx) {
 
 function detectSingle(subject) {
     return subject.c === undefined;
+}
+
+// 演算記号の取得
+function detectOperation(type) {
+    switch (type) {
+        case MethodType.SingleAddition :
+            return "+";
+        case MethodType.SingleSubtraction :
+            return "-";
+        case MethodType.SingleMultiplication :
+            return "×";
+    }
+    return "?";
 }
