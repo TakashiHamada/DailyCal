@@ -84,8 +84,6 @@ function updateEach(ssIdx, sheet, month, day) {
     // --
     console.log(list);
     
-    return;
-    
     // --
     write(sheet, list, "LeftCol");
     write(sheet, list, "RightCol");
