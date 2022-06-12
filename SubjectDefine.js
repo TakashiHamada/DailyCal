@@ -23,7 +23,7 @@ function getSubjectByType(type) {
         case 17 : return subtraction_subtraction_20();
         // case 18 : return null; // 18は欠番
         case 19 : return subtraction_minos();
-        case 20 : return multiplication_10();
+        case 20 : return multiplication_10(50);
     }
     // 例外
     return null;
@@ -358,11 +358,15 @@ function subtraction_minos() {
 }
 
 // 一桁の掛け算
-function multiplication_10() {
+function multiplication_10(max) {
     let subject = {};
     subject.a = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.methodType = MethodType.SingleMultiplication;
     subject.answer = subject.a * subject.b;
-    return subject;
+    // --
+    if (subject.answer < max)
+        return subject;
+    // --
+    return null;
 }

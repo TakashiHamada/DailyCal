@@ -24,7 +24,7 @@ const ssIdList =
         "1w743G6KE1Ki0ORvyq0UcWweliCENEvc1ZsnBm7iSLlg", // 17, 3要素の引き算
         "1VqxtBgBaPVCzs9fZaqUuErM_MPycIUl7gcMbTLrMB2w", // 18, 復習, 全10種類
         "1LaCMpQ6NgGXwACPK460WiwzLdAJdwRWDeig1WDhEkAg", // 19, 答えがマイナス
-        "1EekV2quqtlyrrGQ-an7gFqhVq9qFUZKybhJbJPy1F2k", // 20, 九九
+        "1EekV2quqtlyrrGQ-an7gFqhVq9qFUZKybhJbJPy1F2k", // 20, 九九 ソートすると重複する可能性が高くなる（仕様）
     ];
 
 // --
@@ -79,6 +79,14 @@ function updateEach(ssIdx, sheet, month, day) {
             list = list.sort(function(a, b) {
                 return (a.answer < b.answer) ? -1 : 1;  //オブジェクトの昇順ソート
             });
+            // idふり直し
+            let tmp = [];
+            for (let idx = 0; idx < list.length; idx++) {
+                let subject = list[idx];
+                subject.idx = idx; // 上書き
+                tmp.push(subject);
+            }
+            list = tmp;
             break;
     }
     // --
