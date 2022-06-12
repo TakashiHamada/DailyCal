@@ -74,9 +74,18 @@ function updateEach(ssIdx, sheet, month, day) {
             list = list.concat(makeSubjectList(-1, 3, list.length));
             list = list.concat(makeSubjectList(-2, 3, list.length));
             break;
+        case 20 : // 小さい答えの順番にソート
+            list = makeSubjectList(ssIdx, 30);
+            list = list.sort(function(a, b) {
+                return (a.answer < b.answer) ? -1 : 1;  //オブジェクトの昇順ソート
+            });
+            break;
     }
     // --
     console.log(list);
+    
+    return;
+    
     // --
     write(sheet, list, "LeftCol");
     write(sheet, list, "RightCol");
