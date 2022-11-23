@@ -24,6 +24,9 @@ const ssIdList =
         "1w743G6KE1Ki0ORvyq0UcWweliCENEvc1ZsnBm7iSLlg", // 17, 3要素の引き算
         "1VqxtBgBaPVCzs9fZaqUuErM_MPycIUl7gcMbTLrMB2w", // 18, 復習, 全10種類
         "1EekV2quqtlyrrGQ-an7gFqhVq9qFUZKybhJbJPy1F2k", // 19, 九九, 2-3
+        "1LaCMpQ6NgGXwACPK460WiwzLdAJdwRWDeig1WDhEkAg", // 20, 九九, 4-5
+        "19ImI2WF6a8pRFhVmAMxHm7hvmGXx4OqiTeWHQRLVxkI", // 21, 九九, 6-7
+        "1_JSNvulAfWiby0oZlQArcc1rayCGKcslk6n6b8QIpZM", // 22, 九九, 8-9
     ];
 
 // --
@@ -76,6 +79,18 @@ function updateEach(ssIdx, sheet, month, day) {
         case 19 :
             list = list.concat(makeSubjectList(19, 15));
             list = list.concat(makeSubjectList(20, 15));
+            break;
+        case 20 :
+            list = list.concat(makeSubjectList(21, 15));
+            list = list.concat(makeSubjectList(22, 15));
+            break;
+        case 21 :
+            list = list.concat(makeSubjectList(23, 15));
+            list = list.concat(makeSubjectList(24, 15));
+            break;
+        case 22 :
+            list = list.concat(makeSubjectList(25, 15));
+            list = list.concat(makeSubjectList(26, 15));
             break;
     }
     // --

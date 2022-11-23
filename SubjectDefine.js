@@ -24,6 +24,12 @@ function getSubjectByType(type) {
         // case 18 : return null; // 18は欠番
         case 19 : return multiplication_left_fix(2);
         case 20 : return multiplication_left_fix(3);
+        case 21 : return multiplication_left_fix(4);
+        case 22 : return multiplication_left_fix(5);
+        case 23 : return multiplication_left_fix(6);
+        case 24 : return multiplication_left_fix(7);
+        case 25 : return multiplication_left_fix(8);
+        case 26 : return multiplication_left_fix(9);
     }
     // 例外
     return null;
