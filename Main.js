@@ -23,8 +23,7 @@ const ssIdList =
         "1fHx_laOklPrkVFoqnGwvIm1viPCpt2W73E5jFpYQ0Bs", // 16, 3要素の足し引き算
         "1w743G6KE1Ki0ORvyq0UcWweliCENEvc1ZsnBm7iSLlg", // 17, 3要素の引き算
         "1VqxtBgBaPVCzs9fZaqUuErM_MPycIUl7gcMbTLrMB2w", // 18, 復習, 全10種類
-        "1LaCMpQ6NgGXwACPK460WiwzLdAJdwRWDeig1WDhEkAg", // 19, 答えがマイナス
-        "1EekV2quqtlyrrGQ-an7gFqhVq9qFUZKybhJbJPy1F2k", // 20, 九九 ソートすると重複する可能性が高くなる（仕様）
+        "1EekV2quqtlyrrGQ-an7gFqhVq9qFUZKybhJbJPy1F2k", // 19, 九九, 2-3
     ];
 
 // --
@@ -74,19 +73,9 @@ function updateEach(ssIdx, sheet, month, day) {
             list = list.concat(makeSubjectList(-1, 3, list.length));
             list = list.concat(makeSubjectList(-2, 3, list.length));
             break;
-        case 20 : // 小さい答えの順番にソート
-            list = makeSubjectList(ssIdx, 30);
-            list = list.sort(function(a, b) {
-                return (a.answer < b.answer) ? -1 : 1;  //オブジェクトの昇順ソート
-            });
-            // idふり直し
-            let tmp = [];
-            for (let idx = 0; idx < list.length; idx++) {
-                let subject = list[idx];
-                subject.idx = idx; // 上書き
-                tmp.push(subject);
-            }
-            list = tmp;
+        case 19 :
+            list = list.concat(makeSubjectList(19, 15));
+            list = list.concat(makeSubjectList(20, 15));
             break;
     }
     // --

@@ -22,8 +22,8 @@ function getSubjectByType(type) {
         case -2 : return addition_subtraction_20(); // 混合は-を使用する
         case 17 : return subtraction_subtraction_20();
         // case 18 : return null; // 18は欠番
-        case 19 : return subtraction_minos();
-        case 20 : return multiplication_10(50);
+        case 19 : return multiplication_left_fix(2);
+        case 20 : return multiplication_left_fix(3);
     }
     // 例外
     return null;
@@ -343,30 +343,12 @@ function subtraction_subtraction_20() {
     return null;
 }
 
-// 答えがマイナスになる -1 - -99
-function subtraction_minos() {
+// 一桁の掛け算, 左固定
+function multiplication_left_fix(fix) {
     let subject = {};
-    subject.a = Math.floor(Math.random() * 50); // 0 - 49
-    subject.b = Math.floor(Math.random() * 95) + 5; // 5 - 99
-    subject.methodType = MethodType.SingleSubtraction;
-    subject.answer = subject.a - subject.b;
-    // --
-    if (subject.answer < 0)
-        return subject;
-    // --
-    return null;
-}
-
-// 一桁の掛け算
-function multiplication_10(max) {
-    let subject = {};
-    subject.a = Math.floor(Math.random() * 9) + 1; // 1 - 9
+    subject.a = fix;
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.methodType = MethodType.SingleMultiplication;
     subject.answer = subject.a * subject.b;
-    // --
-    if (subject.answer < max)
-        return subject;
-    // --
-    return null;
+    return subject;
 }
