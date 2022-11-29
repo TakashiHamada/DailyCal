@@ -78,19 +78,19 @@ function updateEach(ssIdx, sheet, month, day) {
             break;
         case 19 :
             list = list.concat(makeSubjectList(19, 15));
-            list = list.concat(makeSubjectList(20, 15));
+            list = list.concat(makeSubjectList(20, 15, list.length));
             break;
         case 20 :
             list = list.concat(makeSubjectList(21, 15));
-            list = list.concat(makeSubjectList(22, 15));
+            list = list.concat(makeSubjectList(22, 15, list.length));
             break;
         case 21 :
             list = list.concat(makeSubjectList(23, 15));
-            list = list.concat(makeSubjectList(24, 15));
+            list = list.concat(makeSubjectList(24, 15, list.length));
             break;
         case 22 :
             list = list.concat(makeSubjectList(25, 15));
-            list = list.concat(makeSubjectList(26, 15));
+            list = list.concat(makeSubjectList(26, 15, list.length));
             break;
     }
     // --
