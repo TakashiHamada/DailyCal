@@ -27,6 +27,7 @@ const ssIdList =
         "1LaCMpQ6NgGXwACPK460WiwzLdAJdwRWDeig1WDhEkAg", // 20, 九九, 4-5
         "19ImI2WF6a8pRFhVmAMxHm7hvmGXx4OqiTeWHQRLVxkI", // 21, 九九, 6-7
         "1_JSNvulAfWiby0oZlQArcc1rayCGKcslk6n6b8QIpZM", // 22, 九九, 8-9
+        "1mTmmwMLcMBY-yzFdRnW3oepCgjODue2WdMdhPW3Bf1g", // 27, 九九, ランダム
     ];
 
 // --

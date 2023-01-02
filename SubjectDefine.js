@@ -30,6 +30,7 @@ function getSubjectByType(type) {
         case 24 : return multiplication_left_fix(7);
         case 25 : return multiplication_left_fix(8);
         case 26 : return multiplication_left_fix(9);
+        case 27 : return multiplication_random();
     }
     // 例外
     return null;
@@ -356,5 +357,20 @@ function multiplication_left_fix(fix) {
     subject.b = Math.floor(Math.random() * 9) + 1; // 1 - 9
     subject.methodType = MethodType.SingleMultiplication;
     subject.answer = subject.a * subject.b;
+    return subject;
+}
+
+// 九九, ランダムだが2以上、答えは1桁でにくく
+function multiplication_random() {
+    let subject = {};
+    subject.a = Math.floor(Math.random() * 8) + 2; // 2 - 9
+    subject.b = Math.floor(Math.random() * 8) + 2; // 2 - 9
+    subject.methodType = MethodType.SingleMultiplication;
+    subject.answer = subject.a * subject.b;
+    // --
+    if (subject.answer < 10)
+        // 答え10未満を出にくくする
+        if (Math.random() < 0.5) return null;
+    
     return subject;
 }
